@@ -188,6 +188,9 @@ class HttpSock(object):
         if self.connection_settings.include_user_agent:
             message = _append_to_header(message, f"User-Agent: restler/{Settings().version}")
 
+        # disable content compression and so on... only works if the server follows http standards.
+        message = _append_to_header(message, f"Accept-Encoding: identity")
+
         # Attempt to throttle the request if necessary
         self._begin_throttle_request()
 
